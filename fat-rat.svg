@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260" role="img" aria-label="Fat rat cartoon">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#2b313a"/>
+      <stop offset="1" stop-color="#1b2028"/>
+    </linearGradient>
+  </defs>
+  <rect width="420" height="260" rx="18" fill="url(#bg)"/>
+
+  <ellipse cx="165" cy="145" rx="92" ry="62" fill="#9aa4af"/>
+  <ellipse cx="250" cy="130" rx="64" ry="48" fill="#a8b2bd"/>
+
+  <circle cx="275" cy="88" r="18" fill="#b6c0ca"/>
+  <circle cx="230" cy="84" r="16" fill="#b6c0ca"/>
+  <circle cx="275" cy="88" r="8" fill="#d08ca8"/>
+  <circle cx="230" cy="84" r="7" fill="#d08ca8"/>
+
+  <circle cx="266" cy="124" r="4.5" fill="#0f141a"/>
+  <circle cx="236" cy="120" r="4.5" fill="#0f141a"/>
+
+  <ellipse cx="286" cy="136" rx="9" ry="7" fill="#e7a4b9"/>
+  <line x1="294" y1="134" x2="320" y2="126" stroke="#cfd6dd" stroke-width="2" stroke-linecap="round"/>
+  <line x1="294" y1="137" x2="323" y2="137" stroke="#cfd6dd" stroke-width="2" stroke-linecap="round"/>
+  <line x1="294" y1="140" x2="320" y2="148" stroke="#cfd6dd" stroke-width="2" stroke-linecap="round"/>
+
+  <circle cx="144" cy="198" r="13" fill="#8f9aa6"/>
+  <circle cx="188" cy="202" r="13" fill="#8f9aa6"/>
+  <circle cx="236" cy="198" r="13" fill="#8f9aa6"/>
+  <circle cx="276" cy="191" r="13" fill="#8f9aa6"/>
+
+  <path d="M72 146 C26 136, 15 182, 48 198 C78 212, 110 186, 103 164" fill="none" stroke="#d08ca8" stroke-width="10" stroke-linecap="round"/>
+
+  <text x="24" y="34" fill="#e6edf3" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">FAT RAT</text>
+</svg>
