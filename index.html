@@ -24,14 +24,83 @@
         padding: 24px;
       }
 
-      .layout {
+      .site-shell {
         width: min(1200px, 100%);
         display: grid;
-        grid-template-columns: 320px 1fr;
-        gap: 20px;
+        gap: 14px;
         opacity: 0;
         transform: translateY(24px) scale(0.985);
         animation: page-enter 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+
+      .top-alert {
+        background: linear-gradient(180deg, #2b1a1a, #201313);
+        border: 1px solid #5a2c2c;
+        color: #ffd9d9;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-weight: 700;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+      }
+
+      .logo-panel {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        width: 108px;
+        height: 108px;
+        border-radius: 28px;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+        display: grid;
+        place-items: center;
+        z-index: 1300;
+        animation: logo-float 5.2s ease-in-out infinite;
+      }
+
+      .logo-letter {
+        margin: 0;
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.06em;
+        background: linear-gradient(180deg, #f5f7ff 0%, #d6ddff 45%, #9db0ff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 8px 22px rgba(118, 147, 255, 0.35);
+        animation: logo-glow 3.8s ease-in-out infinite;
+        font-family: "SF Pro Display", "Segoe UI", Arial, sans-serif;
+      }
+
+      @keyframes logo-float {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-8px) scale(1.02);
+        }
+      }
+
+      @keyframes logo-glow {
+        0%,
+        100% {
+          filter: saturate(1) brightness(1);
+        }
+        50% {
+          filter: saturate(1.25) brightness(1.08);
+        }
+      }
+
+      .layout {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 20px;
       }
 
       @keyframes page-enter {
@@ -365,7 +434,13 @@
     </style>
   </head>
   <body>
-    <div class="layout">
+    <div class="logo-panel" aria-hidden="true">
+      <p class="logo-letter">F</p>
+    </div>
+
+    <div class="site-shell">
+      <div class="top-alert">fent discontinued because buyers too poor to pay for v2</div>
+      <div class="layout">
       <aside class="panel">
         <h2>paste detections</h2>
         <ul class="detections">
