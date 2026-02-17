@@ -25,7 +25,7 @@
       }
 
       .layout {
-        width: min(1100px, 100%);
+        width: min(1200px, 100%);
         display: grid;
         grid-template-columns: 320px 1fr;
         gap: 20px;
@@ -73,8 +73,10 @@
         gap: 20px;
       }
 
-      main {
-        padding: 28px;
+      main,
+      .fent-panel,
+      .docs-panel {
+        padding: 24px;
       }
 
       h1 {
@@ -104,11 +106,8 @@
         color: #8b949e;
       }
 
-      .fent-panel {
-        padding: 22px;
-      }
-
-      .fent-panel h3 {
+      .fent-panel h3,
+      .docs-panel h3 {
         margin: 0 0 14px;
         font-size: 1.25rem;
       }
@@ -125,7 +124,8 @@
         margin-top: 16px;
       }
 
-      .scripts-button {
+      .scripts-button,
+      .music-btn {
         background: #238636;
         color: #ffffff;
         border: 0;
@@ -134,6 +134,11 @@
         font-size: 0.95rem;
         font-weight: 700;
         cursor: pointer;
+      }
+
+      .music-btn {
+        background: #1f6feb;
+        margin-top: 10px;
       }
 
       .scripts-list-wrap {
@@ -151,12 +156,14 @@
         transform: translateY(0);
       }
 
-      .scripts-list {
+      .scripts-list,
+      .docs-list {
         margin: 0;
         padding-left: 18px;
       }
 
-      .scripts-list li {
+      .scripts-list li,
+      .docs-list li {
         margin: 8px 0;
       }
 
@@ -164,6 +171,14 @@
         margin-top: 12px;
         font-size: 0.9rem;
         color: #8b949e;
+      }
+
+      .music-note.ok {
+        color: #3fb950;
+      }
+
+      .music-note.warn {
+        color: #f2cc60;
       }
 
       .center-popup-layer {
@@ -177,8 +192,8 @@
       }
 
       .support-popup {
-        width: min(640px, 95vw);
-        min-height: 220px;
+        width: min(700px, 95vw);
+        min-height: 240px;
         background: linear-gradient(165deg, #1f2630, #161b22);
         border: 1px solid #3a4450;
         border-radius: 16px;
@@ -194,7 +209,7 @@
       }
 
       .support-popup.hide {
-        animation: popup-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation: popup-slide-down-out 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
 
       @keyframes popup-in {
@@ -204,10 +219,10 @@
         }
       }
 
-      @keyframes popup-out {
+      @keyframes popup-slide-down-out {
         to {
           opacity: 0;
-          transform: scale(0.96) translateY(18px);
+          transform: scale(0.98) translateY(54px);
         }
       }
 
@@ -240,10 +255,21 @@
         line-height: 1.5;
       }
 
-      .popup-hint {
-        margin-top: 14px;
+      .popup-hint,
+      .popup-countdown {
+        margin-top: 12px;
         color: #8b949e;
         font-size: 0.95rem;
+      }
+
+      .ad-feed {
+        margin-top: 16px;
+        border-top: 1px solid #30363d;
+        padding-top: 12px;
+      }
+
+      .ad-feed strong {
+        color: #f2cc60;
       }
 
       .modal {
@@ -262,16 +288,11 @@
       }
 
       .modal-card {
-        width: min(520px, 100%);
+        width: min(560px, 100%);
         background: #161b22;
         border: 1px solid #30363d;
         border-radius: 12px;
         padding: 20px;
-      }
-
-      .modal-card h4 {
-        margin: 0 0 10px;
-        font-size: 1.2rem;
       }
 
       .modal-actions {
@@ -336,17 +357,50 @@
             </div>
           </div>
 
-          <p class="music-note">Now playing: <strong>music.mp3</strong></p>
+          <p id="musicStatus" class="music-note">Music: trying to autoplay <strong>music.mp3</strong>...</p>
+          <button id="startMusicBtn" class="music-btn" type="button">Play music</button>
+
+          <div class="ad-feed">
+            <p><strong>More ads:</strong></p>
+            <p>• Support our creators with a donation.</p>
+            <p>• Support israel by donating 1$.</p>
+            <p>• Support Fent v2 by donating money.</p>
+            <p>• Keep RatTrap online with your support.</p>
+          </div>
         </main>
 
         <section class="panel fent-panel">
           <h3>Fent v2 in progress...</h3>
           <img class="rat-image" src="fat-rat.svg" alt="Fat rat illustration" />
         </section>
+
+        <section class="panel docs-panel">
+          <h3>Documentation: What is Fent v2?</h3>
+          <p>
+            Fent v2 is presented as a script for Roblox Fallen Survival with many built-in features,
+            utility options, and quality-of-life automation for gameplay workflows.
+          </p>
+          <ul class="docs-list">
+            <li>Designed for Fallen Survival-focused scripting workflows.</li>
+            <li>Advertised as feature-rich and regularly improved.</li>
+            <li>Intended to bundle multiple gameplay helper features in one package.</li>
+          </ul>
+
+          <h3>Documentation: ChatGPT users in Roblox scripting</h3>
+          <p>
+            Some communities criticize users who rely too heavily on AI-generated scripts, saying this can lead
+            to lower code understanding, copied logic, and weaker debugging habits when they do not review the output.
+          </p>
+          <ul class="docs-list">
+            <li>Common complaint: publishing untested scripts from AI output.</li>
+            <li>Common complaint: weak understanding of what the script actually does.</li>
+            <li>Best practice: review, test, and learn from generated code before sharing.</li>
+          </ul>
+        </section>
       </div>
     </div>
 
-    <audio id="bgMusic" src="music.mp3" autoplay loop></audio>
+    <audio id="bgMusic" src="music.mp3" loop></audio>
 
     <div id="centerPopupLayer" class="center-popup-layer" aria-live="polite"></div>
 
@@ -356,11 +410,7 @@
         <p>Watch this YouTube video for 10 seconds and access the website:</p>
         <p><strong>https://www.youtube.com/watch?v=jrkV6FMHVWE&t=6s</strong></p>
         <div class="modal-actions">
-          <a
-            class="btn btn-primary"
-            href="https://www.youtube.com/watch?v=jrkV6FMHVWE&t=6s"
-            target="_blank"
-            rel="noopener noreferrer"
+          <a class="btn btn-primary" href="https://www.youtube.com/watch?v=jrkV6FMHVWE&t=6s" target="_blank" rel="noopener noreferrer"
             >Watch video</a
           >
           <button id="closeAdModal" class="btn btn-muted" type="button">Close</button>
@@ -375,6 +425,8 @@
       const adModal = document.getElementById('adModal');
       const closeAdModal = document.getElementById('closeAdModal');
       const bgMusic = document.getElementById('bgMusic');
+      const startMusicBtn = document.getElementById('startMusicBtn');
+      const musicStatus = document.getElementById('musicStatus');
 
       scriptsButton.addEventListener('click', () => {
         const isOpen = scriptsListWrap.classList.toggle('open');
@@ -382,9 +434,33 @@
         scriptsButton.textContent = isOpen ? 'Hide scripts list' : 'Open scripts list';
       });
 
+      async function startMusic() {
+        try {
+          await bgMusic.play();
+          musicStatus.classList.remove('warn');
+          musicStatus.classList.add('ok');
+          musicStatus.innerHTML = 'Music: <strong>playing music.mp3</strong>';
+        } catch {
+          musicStatus.classList.remove('ok');
+          musicStatus.classList.add('warn');
+          musicStatus.innerHTML = 'Music blocked by browser autoplay. Click <strong>Play music</strong>.';
+        }
+      }
+
+      startMusicBtn.addEventListener('click', startMusic);
+      window.addEventListener('load', startMusic);
+      window.addEventListener('click', () => {
+        if (bgMusic.paused) {
+          startMusic();
+        }
+      }, { once: true });
+
       const popupMessages = [
         'Wanna support creators of website and donate 20$ for support?',
-        'RatTrap roblox supported.'
+        'RatTrap roblox supported.',
+        'Support our creators with a donation.',
+        'Support israel by donating 1$.',
+        'Support Fent v2 by donating money.'
       ];
 
       function createSupportPopup(message) {
@@ -396,21 +472,31 @@
             <button class="popup-close" type="button" aria-label="Close popup">✕</button>
           </div>
           <p class="popup-message">${message}</p>
-          <p class="popup-hint">Click ✕ to close (5-second delay).</p>
+          <p class="popup-hint">Click ✕ to close with a 5-second countdown.</p>
+          <p class="popup-countdown"></p>
         `;
 
         const closeButton = popup.querySelector('.popup-close');
-        const hint = popup.querySelector('.popup-hint');
+        const countdownEl = popup.querySelector('.popup-countdown');
 
         closeButton.addEventListener('click', () => {
-          hint.textContent = 'Please wait 5 seconds to close...';
           closeButton.disabled = true;
+          let remaining = 5;
+          countdownEl.textContent = `Please wait ${remaining} seconds to close...`;
 
-          setTimeout(() => {
+          const countdownInterval = setInterval(() => {
+            remaining -= 1;
+            if (remaining > 0) {
+              countdownEl.textContent = `Please wait ${remaining} seconds to close...`;
+              return;
+            }
+
+            clearInterval(countdownInterval);
+            countdownEl.textContent = 'Closing...';
             popup.classList.remove('show');
             popup.classList.add('hide');
             popup.addEventListener('animationend', () => popup.remove(), { once: true });
-          }, 5000);
+          }, 1000);
         });
 
         centerPopupLayer.innerHTML = '';
@@ -442,10 +528,6 @@
 
       setTimeout(openAdModal, 60000);
       setInterval(openAdModal, 60000);
-
-      bgMusic.play().catch(() => {
-        // Autoplay can be blocked by browsers until user interaction.
-      });
     </script>
   </body>
 </html>
