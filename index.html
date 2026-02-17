@@ -58,6 +58,11 @@
         line-height: 1.4;
       }
 
+      .main-column {
+        display: grid;
+        gap: 20px;
+      }
+
       main {
         padding: 28px;
       }
@@ -89,6 +94,23 @@
         color: #8b949e;
       }
 
+      .fent-panel {
+        padding: 22px;
+      }
+
+      .fent-panel h3 {
+        margin: 0 0 14px;
+        font-size: 1.25rem;
+      }
+
+      .rat-image {
+        width: 100%;
+        max-width: 420px;
+        border-radius: 10px;
+        border: 1px solid #30363d;
+        display: block;
+      }
+
       @media (max-width: 900px) {
         .layout {
           grid-template-columns: 1fr;
@@ -108,12 +130,19 @@
         </ul>
       </aside>
 
-      <main class="panel">
-        <h1>Detections on paste:</h1>
-        <p><strong>Nebula Solutions</strong> : <span class="status">Detected</span> : Luna.vip leak</p>
-        <p>paste percent : <span class="percent">100%</span></p>
-        <p class="made-by">made From Rustygooners</p>
-      </main>
+      <div class="main-column">
+        <main class="panel">
+          <h1>Detections on paste:</h1>
+          <p><strong>Nebula Solutions</strong> : <span class="status">Detected</span> : Luna.vip leak</p>
+          <p>paste percent : <span class="percent">100%</span></p>
+          <p class="made-by">made From Rustygooners</p>
+        </main>
+
+        <section class="panel fent-panel">
+          <h3>Fent v2 in progress...</h3>
+          <img class="rat-image" src="fat-rat.svg" alt="Fat rat illustration" />
+        </section>
+      </div>
     </div>
   </body>
 </html>
