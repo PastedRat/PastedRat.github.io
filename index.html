@@ -111,6 +111,141 @@
         display: block;
       }
 
+      .scripts-control {
+        margin-top: 16px;
+      }
+
+      .scripts-button {
+        background: #238636;
+        color: #ffffff;
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .scripts-list-wrap {
+        margin-top: 10px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: max-height 0.45s ease, opacity 0.4s ease, transform 0.4s ease;
+      }
+
+      .scripts-list-wrap.open {
+        max-height: 130px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .scripts-list {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .scripts-list li {
+        margin: 8px 0;
+      }
+
+      .toast-container {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        display: grid;
+        gap: 10px;
+        z-index: 1000;
+      }
+
+      .toast {
+        min-width: 260px;
+        max-width: 360px;
+        background: #21262d;
+        color: #e6edf3;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 12px 14px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+        opacity: 0;
+        transform: translateY(12px);
+        animation: toast-in 0.35s ease forwards;
+      }
+
+      .toast.fade-out {
+        animation: toast-out 0.35s ease forwards;
+      }
+
+      @keyframes toast-in {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes toast-out {
+        to {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(1, 4, 9, 0.72);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1100;
+        padding: 20px;
+      }
+
+      .modal.open {
+        display: flex;
+      }
+
+      .modal-card {
+        width: min(520px, 100%);
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 12px;
+        padding: 20px;
+      }
+
+      .modal-card h4 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+      }
+
+      .modal-actions {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-block;
+        text-decoration: none;
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: #2f81f7;
+        color: white;
+      }
+
+      .btn-muted {
+        background: #30363d;
+        color: #e6edf3;
+      }
+
       @media (max-width: 900px) {
         .layout {
           grid-template-columns: 1fr;
@@ -136,6 +271,15 @@
           <p><strong>Nebula Solutions</strong> : <span class="status">Detected</span> : Luna.vip leak</p>
           <p>paste percent : <span class="percent">100%</span></p>
           <p class="made-by">made From Rustygooners</p>
+
+          <div class="scripts-control">
+            <button id="toggleScripts" class="scripts-button" type="button">Open scripts list</button>
+            <div id="scriptsListWrap" class="scripts-list-wrap" aria-hidden="true">
+              <ul class="scripts-list">
+                <li><strong>Incoming scripts</strong> : Fent v2</li>
+              </ul>
+            </div>
+          </div>
         </main>
 
         <section class="panel fent-panel">
@@ -144,5 +288,81 @@
         </section>
       </div>
     </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+    <div id="adModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="adTitle">
+      <div class="modal-card">
+        <h4 id="adTitle">Ad break</h4>
+        <p>Watch this YouTube video for 10 seconds and access the website:</p>
+        <p><strong>https://www.youtube.com/watch?v=jrkV6FMHVWE&t=6s</strong></p>
+        <div class="modal-actions">
+          <a
+            class="btn btn-primary"
+            href="https://www.youtube.com/watch?v=jrkV6FMHVWE&t=6s"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Watch video</a
+          >
+          <button id="closeAdModal" class="btn btn-muted" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const scriptsButton = document.getElementById('toggleScripts');
+      const scriptsListWrap = document.getElementById('scriptsListWrap');
+      const toastContainer = document.getElementById('toastContainer');
+      const adModal = document.getElementById('adModal');
+      const closeAdModal = document.getElementById('closeAdModal');
+
+      scriptsButton.addEventListener('click', () => {
+        const isOpen = scriptsListWrap.classList.toggle('open');
+        scriptsListWrap.setAttribute('aria-hidden', String(!isOpen));
+        scriptsButton.textContent = isOpen ? 'Hide scripts list' : 'Open scripts list';
+      });
+
+      function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+
+        setTimeout(() => {
+          toast.classList.add('fade-out');
+          toast.addEventListener('animationend', () => toast.remove(), { once: true });
+        }, 5000);
+      }
+
+      const popupMessages = [
+        'Wanna support creators of website and donate 20$ for support?',
+        'RatTrap roblox supported.'
+      ];
+
+      function showRandomSupportPopup() {
+        const index = Math.floor(Math.random() * popupMessages.length);
+        showToast(popupMessages[index]);
+      }
+
+      showRandomSupportPopup();
+      setInterval(showRandomSupportPopup, 30000);
+
+      function openAdModal() {
+        adModal.classList.add('open');
+      }
+
+      closeAdModal.addEventListener('click', () => {
+        adModal.classList.remove('open');
+      });
+
+      adModal.addEventListener('click', (event) => {
+        if (event.target === adModal) {
+          adModal.classList.remove('open');
+        }
+      });
+
+      setTimeout(openAdModal, 60000);
+      setInterval(openAdModal, 60000);
+    </script>
   </body>
 </html>
