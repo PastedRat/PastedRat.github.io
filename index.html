@@ -167,6 +167,41 @@
         margin: 8px 0;
       }
 
+      .changelog-control {
+        margin-top: 14px;
+      }
+
+      .changelog-button {
+        background: #8957e5;
+        color: #fff;
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .changelog-box {
+        margin-top: 10px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: max-height 0.45s ease, opacity 0.35s ease, transform 0.35s ease;
+      }
+
+      .changelog-box.open {
+        max-height: 120px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .changelog-item {
+        margin: 0;
+        color: #c9d1d9;
+      }
+
       .music-note {
         margin-top: 12px;
         font-size: 0.9rem;
@@ -357,6 +392,13 @@
             </div>
           </div>
 
+          <div class="changelog-control">
+            <button id="toggleChangelog" class="changelog-button" type="button">Click me to view changes in Fent v2</button>
+            <div id="changelogBox" class="changelog-box" aria-hidden="true">
+              <p class="changelog-item">17th february 2026 : Added CHATGPT!</p>
+            </div>
+          </div>
+
           <p id="musicStatus" class="music-note">Music: trying to autoplay <strong>music.mp3</strong>...</p>
           <button id="startMusicBtn" class="music-btn" type="button">Play music</button>
 
@@ -421,6 +463,8 @@
     <script>
       const scriptsButton = document.getElementById('toggleScripts');
       const scriptsListWrap = document.getElementById('scriptsListWrap');
+      const changelogButton = document.getElementById('toggleChangelog');
+      const changelogBox = document.getElementById('changelogBox');
       const centerPopupLayer = document.getElementById('centerPopupLayer');
       const adModal = document.getElementById('adModal');
       const closeAdModal = document.getElementById('closeAdModal');
@@ -432,6 +476,14 @@
         const isOpen = scriptsListWrap.classList.toggle('open');
         scriptsListWrap.setAttribute('aria-hidden', String(!isOpen));
         scriptsButton.textContent = isOpen ? 'Hide scripts list' : 'Open scripts list';
+      });
+
+      changelogButton.addEventListener('click', () => {
+        const isOpen = changelogBox.classList.toggle('open');
+        changelogBox.setAttribute('aria-hidden', String(!isOpen));
+        changelogButton.textContent = isOpen
+          ? 'Hide changes in Fent v2'
+          : 'Click me to view changes in Fent v2';
       });
 
       async function startMusic() {
